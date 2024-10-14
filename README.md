@@ -1,25 +1,34 @@
-# README
+## Описание
+Это тестовое приложение на Ruby on Rails, которое демонстрирует основные функции работы с пользователями, постами и комментариями. Пользователи могут создавать посты, комментировать их и подписываться на других пользователей.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Установка
 
-Things you may want to cover:
+### Предварительные требования
+- Ruby (версия 3.0 или выше)
+- Rails (версия 7.0 или выше)
+- PostgreSQL (версия 12.0 или выше)
 
-* Ruby version 
+### Клонирование репозитория
+```bash
+git clone https://github.com/Shabanov-Ruby/testing.git
+cd testing
+```
 
-* System dependencies
+## Установка зависимостей 
+```bash
+bundle install
+```
 
-* Configuration
+## Взаимодействие с базой данных
+```bash
+rails db:create
+rails db:migrate
+rails db:seed
+```
+## Вход в систему
+Для входа в систему используйте следующие данные:
 
-* Database creation
+- Email: user0@example.com
+- Пароль: 123456
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# testing
+или создайте нового пользователя через регистрацию. 
