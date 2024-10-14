@@ -1,0 +1,20 @@
+require:
+- rubocop-performance
+- rubocop-rspec
+- rubocop-rails
+AllCops:
+  Exclude:
+    - "app/assets/**/*"
+    - "bin/**/*"
+    - "config/**/*"
+    - "db/**/*"
+    - "lib/**/generators/**/*"
+    - "lib/**/tasks/**/*"
+    - "node_modules/**/*"
+    - "public/**/*"
+    - "script/**/*"
+    - "spec/**/*"
+    - "vendor/**/*"
+    - "config.ru"
+Style/Documentation:
+  Enabled: false

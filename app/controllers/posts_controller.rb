@@ -1,13 +1,13 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
   def create
     @post = current_user.posts.build(post_params)
-    
-    if @post.content.blank?
-      return redirect_to root_path, alert: 'Публикация не может быть пустой!'
-    end
-    
+
+    return redirect_to root_path, alert: 'Публикация не может быть пустой!' if @post.content.blank?
+
     if @post.save
       redirect_to root_path, notice: 'Публикация создана!'
     else

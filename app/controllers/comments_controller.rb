@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :set_post
 
@@ -13,23 +15,23 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     if @comment.update(comment_params)
-      redirect_to posts_path, notice: 'Комментарий успешно обновлен.' 
+      redirect_to posts_path, notice: 'Комментарий успешно обновлен.'
     else
       render :edit, alert: 'Комментарий не удалось обновить.'
     end
-  end  
+  end
 
   def destroy
     @comment = Comment.find(params[:id])
-    
+
     if @comment.user == current_user
       delete_sub_comments(@comment)
       @comment.destroy
-      flash[:notice] = "Комментарий успешно удален."
+      flash[:notice] = 'Комментарий успешно удален.'
     else
-      flash[:alert] = "У вас нет прав на удаление этого комментария."
+      flash[:alert] = 'У вас нет прав на удаление этого комментария.'
     end
-  
+
     redirect_back(fallback_location: root_path)
   end
 
@@ -37,8 +39,8 @@ class CommentsController < ApplicationController
 
   def delete_sub_comments(comment)
     comment.replies.each do |child|
-      delete_sub_comments(child) 
-      child.destroy 
+      delete_sub_comments(child)
+      child.destroy
     end
   end
 
