@@ -1,6 +1,71 @@
 <% if user_signed_in? %>
     <span>Здравствуйте, <%= current_user.email %></span>
     <%= button_to 'Выйти', destroy_user_session_path, :method => :delete %>
+
+    <%= link_to 'Мой профиль', user_path(current_user), class: 'btn btn-primary registration' %>
+
+  <div class="content-container">
+    <%= form_with(model: Post.new, url: posts_path, local: true) do |form| %>
+      <div>
+        <%= form.text_area :content, placeholder: "Что у вас нового?" %>
+      </div>
+      <%= form.submit "Опубликовать" %>
+    <% end %>
+    <h2>Ваши публикации</h2>
+    <% if @my_posts.present? %>
+      <% @my_posts.each do |post| %>
+      <p>
+        <br> Вы: <%= post.content %>
+        <div style="display: inline-flex; gap: 10px;">
+          <%= post.created_at.strftime("%-d.%m.%Y, %H:%M") %>  
+          <%= button_to 'Редактировать', edit_post_path(post), method: :get, class: 'btn btn-primary' %>
+          <%= button_to 'Удалить', post_path(post), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-danger' %>
+        </div>
+      </p>
+      <% end %>
+    <% else %>
+      <p>У вас пока нет публикаций.</p>
+    <% end %>
+  </div>  
+
+  <div class="users-section">
+  <h2>Пользователи</h2>
+    <ul>
+      <% if @users.present? %>
+        <% @users.each do |user| %>
+          <% unless user == current_user %> 
+            <li>
+              <%= link_to user.email, user_path(user) %>
+            </li>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p>Нет других пользователей для отображения.</p>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="following-section">
+    <h1>Лента</h1>
+    <% if @following_posts.present? %>
+      <% @following_posts.each do |post| %>
+        <p>
+          <%= post.user.email %>: <%= post.created_at.strftime("%-d.%m.%Y, %H:%M") %><br> 
+          Сообщение: <%= post.content %>
+          <%= form_with(model: [post, Comment.new], url: post_comments_path(post), local: true) do |form| %>
+            <div style="display: flex; align-items: center;">
+              <%= form.text_area :content, placeholder: "Комментарий..." %>
+              <%= form.hidden_field :parent_id %>
+              <%= form.submit "Добавить комментарий", style: "margin-left: 10px;" %>
+            </div>
+          <% end %>
+          <%= render partial: 'posts/comment', collection: post.comments.where(parent_id: nil), as: :comment %>
+        </p>
+      <% end %>
+    <% else %>
+      <p>Пока нет публикаций от подписчиков.</p>
+    <% end %>
+  </div>
 <% else %>
     <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
 <% end %>

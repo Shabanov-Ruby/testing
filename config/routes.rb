@@ -9,4 +9,14 @@ Rails.application.routes.draw do
   root "home_page#index"
   # Defines the root path route ("/")
   # root "posts#index"
+  # 
+  resources :users do
+    member do
+      post 'follow'
+      post 'unfollow'
+    end
+  end
+
+  resources :posts
+  
 end
