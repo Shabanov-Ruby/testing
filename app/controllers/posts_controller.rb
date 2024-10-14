@@ -1,15 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
-  def index
-    if user_signed_in?
-      @my_posts = current_user.posts.order(created_at: :desc) 
-      @users = User.where.not(id: current_user.id) 
-      following_ids = current_user.following.pluck(:id)
-      @following_posts = Post.where(user_id: following_ids).where.not(user_id: current_user.id).order(created_at: :desc)
-    end
-  end
-
   def create
     @post = current_user.posts.build(post_params)
     if @post.save

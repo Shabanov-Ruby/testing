@@ -1,9 +1,0 @@
-ru:
-  title: "Вход в систему"
-  users:
-    sessions:
-      new:
-        email: "Электронная почта"
-        password: "Пароль"
-        remember_me: "Запомнить меня"
-        log_in: "Войти"

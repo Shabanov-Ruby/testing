@@ -5,9 +5,9 @@
     Сообщение: <%= comment.content.html_safe %><br> 
     <%= comment.created_at.strftime('%-d %m %Y, %H:%M') %> <%= comment.user.email %>
     <% if comment.user == current_user %>
+      <%= button_to 'Изменить', edit_post_comment_path(comment.post, comment), method: :get, class: 'btn btn-warning' %>
       <%= button_to 'Удалить', post_comment_path(comment.post, comment), method: :delete, 
           data: { confirm: 'Вы уверены, что хотите удалить этот комментарий и все его ответы?' }, class: 'btn btn-danger' %>
-      <%= button_to 'Изменить', edit_post_comment_path(comment.post, comment), method: :get, class: 'btn btn-warning' %>
     <% end %>
   </div>
 </div>
