@@ -3,10 +3,15 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+    
+    if @post.content.blank?
+      return redirect_to root_path, alert: 'Публикация не может быть пустой!'
+    end
+    
     if @post.save
       redirect_to root_path, notice: 'Публикация создана!'
     else
-      render :index, alert: 'Публикация не создана!'
+      render :index, status: :unprocessable_entity, alert: 'Публикация не создана!'
     end
   end
 
