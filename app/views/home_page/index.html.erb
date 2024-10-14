@@ -1,11 +1,11 @@
 <% if user_signed_in? %>
-    <span>Здравствуйте, <%= current_user.email %></span>
     <%= button_to 'Выйти', destroy_user_session_path, class: 'btn btn-primary sign_out', :method => :delete %>
 
     <%= button_to 'Мой профиль', user_path(current_user), class: 'btn btn-primary registration', :method => :get  %>
 
   <div class="content-container">
     <%= form_with(model: Post.new, url: posts_path, local: true) do |form| %>
+      <h4> Здравствуйте, <%= current_user.email %></h4>
       <div>
         <%= form.text_area :content, placeholder: "Что у вас нового?" %>
       </div>

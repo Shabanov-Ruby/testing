@@ -44,6 +44,13 @@ ru:
       updated: "Ваш аккаунт был успешно обновлён."
       updated_but_not_signed_in: "Ваш аккаунт был успешно обновлён, но так как пароль был изменён, вам нужно снова войти в систему."
     sessions:
+      new:
+        title: "Вход"
+        sign_up: "Зарегистрироваться"
+        email: "Электронная почта"
+        password: "Пароль"
+        remember_me: "Запомнить меня"
+        log_in: "Войти"
       signed_in: "Вы успешно вошли в систему."
       signed_out: "Вы успешно вышли из системы."
       already_signed_out: "Вы уже вышли из системы."
@@ -61,13 +68,3 @@ ru:
       not_saved:
         one: "1 ошибка не позволила сохранить %{resource}:"
         other: "%{count} ошибок не позволили сохранить %{resource}:"
-  activerecord:
-    errors:
-      models:
-        user:
-          attributes:
-            password:
-              blank: "Пароль не может быть пустым."
-              too_short: "Пароль слишком короткий (минимум %{count} символов)."
-            password_confirmation:
-              blank: "Подтверждение пароля не может быть пустым."
