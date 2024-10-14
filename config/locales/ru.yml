@@ -1,0 +1,14 @@
+# config/locales/ru.yml
+ru:
+  users:
+    sessions:
+      new:
+        title: "Вход"
+        email: "Электронная почта"
+        password: "Пароль"
+        remember_me: "Запомнить меня"
+        log_in: "Войти"
+  errors:
+    messages:
+      not_saved: "Не удалось сохранить %{resource}."
+

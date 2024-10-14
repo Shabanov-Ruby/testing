@@ -13,3 +13,54 @@
  *= require_tree .
  *= require_self
  */
+
+ *{
+    box-sizing: border-box;
+ }
+ body {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-content: center;
+    margin: 97px auto;
+    gap: 21px;
+    width: 222px;
+}
+.sign_out{
+    display: block;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+}
+
+
+.users-section {
+    display: block;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+}
+
+.registration{
+    display: block;
+    position: absolute;
+    top: 4rem;
+    left: 2rem;
+}
+div{
+    padding: 0.1rem;
+    margin: 0.1rem;
+}
+textarea{
+    padding: 0px;
+    margin: 0px;
+}
+textarea::placeholder{
+    padding: 2px;
+}
+
+.content-container {
+    position: absolute;
+    top: 2rem;
+    left: 14rem;
+}

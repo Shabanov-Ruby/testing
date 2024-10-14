@@ -1,8 +1,8 @@
 <% if user_signed_in? %>
     <span>Здравствуйте, <%= current_user.email %></span>
-    <%= button_to 'Выйти', destroy_user_session_path, :method => :delete %>
+    <%= button_to 'Выйти', destroy_user_session_path, class: 'btn btn-primary sign_out', :method => :delete %>
 
-    <%= link_to 'Мой профиль', user_path(current_user), class: 'btn btn-primary registration' %>
+    <%= button_to 'Мой профиль', user_path(current_user), class: 'btn btn-primary registration', :method => :get  %>
 
   <div class="content-container">
     <%= form_with(model: Post.new, url: posts_path, local: true) do |form| %>
@@ -13,15 +13,16 @@
     <% end %>
     <h2>Ваши публикации</h2>
     <% if @my_posts.present? %>
+      <p>Всего ваших публикаций: <%= @my_posts.count %></p>
       <% @my_posts.each do |post| %>
-      <p>
-        <br> Вы: <%= post.content %>
-        <div style="display: inline-flex; gap: 10px;">
-          <%= post.created_at.strftime("%-d.%m.%Y, %H:%M") %>  
-          <%= button_to 'Редактировать', edit_post_path(post), method: :get, class: 'btn btn-primary' %>
-          <%= button_to 'Удалить', post_path(post), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-danger' %>
-        </div>
-      </p>
+        <p>
+          <br> Вы: <%= post.content %>
+          <div style="display: inline-flex; gap: 10px;">
+            <%= post.created_at.strftime("%-d.%m.%Y, %H:%M") %>  
+            <%= button_to 'Редактировать', edit_post_path(post), method: :get, class: 'btn btn-primary' %>
+            <%= button_to 'Удалить', post_path(post), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-danger' %>
+          </div>
+        </p>
       <% end %>
     <% else %>
       <p>У вас пока нет публикаций.</p>
@@ -66,6 +67,4 @@
       <p>Пока нет публикаций от подписчиков.</p>
     <% end %>
   </div>
-<% else %>
-    <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
 <% end %>
