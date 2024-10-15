@@ -5,7 +5,7 @@
 
   <div class="content-container">
     <%= form_with(model: Post.new, url: posts_path, local: true) do |form| %>
-      <h4> Здравствуйте, <%= current_user.email %></h4>
+      <h4> Здравствуйте, <%= current_user.email.gsub(/<.*?>/,'').gsub(/(.{1,20})/, "\\1\n") %> </h4>
       <div>
         <%= form.text_area :content, placeholder: "Что у вас нового?" %>
       </div>
@@ -17,8 +17,7 @@
       <p>Всего ваших публикаций: <%= @my_posts.count %></p>
       <% @my_posts.each do |post| %>
         <p>
-          <br/> Вы: 
-          <div style="max-width: 200px;"><%= post.content %></div>
+          <br/> Вы: <%=  simple_format(post.content) %>
           <div style="display: inline-flex; gap: 10px;">
             <%= post.created_at.strftime("%-d.%m.%Y, %H:%M") %>  
             <%= button_to 'Редактировать', edit_post_path(post), method: :get, class: 'btn btn-primary' %>

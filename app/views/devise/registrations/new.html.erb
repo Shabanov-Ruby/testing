@@ -5,9 +5,9 @@
 
   <div class="field">
     <%= f.label :email, t('email') %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", pattern: /.{1,35}/ %>
   </div>
-
+  
   <div class="field">
     <%= f.label :password, t('password') %>
     <% if @minimum_password_length %>
