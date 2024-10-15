@@ -6,12 +6,12 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
 
-    return redirect_to root_path, alert: 'Публикация не может быть пустой!' if @post.content.blank?
+    return redirect_to root_path, notice: 'Публикация не может быть пустой!' if @post.content.blank?
 
     if @post.save
       redirect_to root_path, notice: 'Публикация создана!'
     else
-      render :index, status: :unprocessable_entity, alert: 'Публикация не создана!'
+      redirect_to root_path, notice: 'Публикация не может быть создана!'
     end
   end
 
@@ -22,9 +22,10 @@ class PostsController < ApplicationController
   def update
     @post = current_user.posts.find(params[:id])
     if @post.update(post_params)
-      redirect_to root_path, notice: 'Публикация обновлена!'
+      flash[:notice] = 'Публикация обновлена!' if @post.saved_changes?
+      redirect_to root_path
     else
-      render :edit, alert: 'Публикация не обновлена!'
+      redirect_to edit_post_path(@post), notice: 'Публикацию не удалось обновить.'
     end
   end
 
@@ -33,7 +34,7 @@ class PostsController < ApplicationController
     if @post.destroy
       redirect_to root_path, notice: 'Публикация удалена!'
     else
-      redirect_to root_path, alert: 'Публикация не может быть удалена!'
+      redirect_to root_path, notice: 'Публикация не может быть удалена!'
     end
   end
 

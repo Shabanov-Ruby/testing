@@ -12,8 +12,6 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
   end
 
-  
-
   def destroy
     @comment = Comment.find(params[:id])
 
@@ -29,13 +27,10 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     if @comment.update(comment_params)
-      if @comment.saved_changes?
-        redirect_to posts_path, notice: 'Комментарий успешно обновлен.'
-      else
-        redirect_to posts_path
-      end
+      flash[:notice] = 'Комментарий обновлен.' if @comment.saved_changes?
+      redirect_to posts_path
     else
-      render :edit, alert: 'Комментарий не удалось обновить.'
+      redirect_to edit_post_comment_path(@comment), notice: 'Комментарий не удалось обновить.'
     end
   end
 

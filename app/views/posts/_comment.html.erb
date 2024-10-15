@@ -2,7 +2,7 @@
 
 <div style="margin-left: <%= margin_left %>px;">
   <div style="display: inline-flex; align-items: center; gap: 10px; margin-top: 10px;">
-    Сообщение:  <%= comment.content.html_safe %><br> 
+    Сообщение:  <%= comment.content.html_safe %><br>  
     <%= comment.created_at.strftime('%-d %m %Y, %H:%M') %> <%= comment.user.email %>
     <% if comment.user == current_user %>
       <%= button_to 'Изменить', edit_post_comment_path(comment.post, comment), method: :get, class: 'btn btn-warning' %>

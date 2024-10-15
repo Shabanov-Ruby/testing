@@ -1,10 +1,13 @@
 <h2>Редактировать комментарий</h2>
-
+<%= flash[:notice] %>
 <%= form_with(model: [@comment.post, @comment], local: true) do |form| %>
+  
   <div>
     <%= form.text_area :content %>
   </div>
-  <%= form.submit "Сохранить изменения", class: 'btn btn-primary' %>  <%= flash[:notice] %>
+  <%= form.submit "Сохранить изменения", class: 'btn btn-primary' %>
+  
+  
 <% end %>
 
 <%= link_to 'Назад', root_path %>
