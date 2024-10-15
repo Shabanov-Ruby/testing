@@ -14,6 +14,7 @@ class Comment < ApplicationRecord
   def level
     parent_id.nil? ? 0 : parent.level + 1
   end
+
   private
 
   def format_text
