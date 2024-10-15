@@ -53,7 +53,7 @@
       <% @following_posts.each do |post| %>
         <p>
           <%= post.user.email %>: <%= post.created_at.strftime("%-d.%m.%Y, %H:%M") %><br> 
-          Сообщение:  <%= post.content %>
+          Пост:  <%= post.content %>
           <%= form_with(model: [post, Comment.new], url: post_comments_path(post), local: true) do |form| %>
             <div style="display: flex; align-items: center;">
               <%= form.text_area :content, placeholder: "Комментарий..." %>
