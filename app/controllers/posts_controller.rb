@@ -17,15 +17,20 @@ class PostsController < ApplicationController
 
   def edit
     @post = current_user.posts.find(params[:id])
+    @initial_content = @post.content
   end
 
   def update
     @post = current_user.posts.find(params[:id])
-    if @post.update(post_params)
+    if @post.content == post_params[:content]
+      flash[:notice] = 'Ничего не изменено. Пожалуйста, внесите изменения.'
+      render :edit
+    elsif @post.update(post_params)
       flash[:notice] = 'Публикация обновлена!' if @post.saved_changes?
       redirect_to root_path
     else
-      redirect_to edit_post_path(@post), notice: 'Публикацию не удалось обновить.'
+      flash[:alert] = 'Публикацию не удалось обновить.'
+      render :edit
     end
   end
 

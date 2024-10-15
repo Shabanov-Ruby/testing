@@ -6,7 +6,17 @@
   <div>
     <%= form.text_area :content, placeholder: "Редактировать публикацию..." %>
   </div>
-  <%= form.submit "Обновить" %>
+  <%= form.submit "Обновить", class: "update-post", disabled: true %>
 <% end %>
 
 <%= link_to 'Назад', root_path %>
+<script>
+  var initialContent = document.querySelector('#post_content').value
+  document.querySelector('#post_content').addEventListener('input', () => {
+  var content = document.querySelector('#post_content').value
+  document.querySelector('.update-post').disabled = false
+  if (content === initialContent) {
+    document.querySelector('.update-post').disabled = true
+  }
+})
+</script>
