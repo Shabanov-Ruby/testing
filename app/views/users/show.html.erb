@@ -12,8 +12,8 @@
 <% if @posts.present? %>
   <% @posts.each do |post| %>
     <p>
-      <%= post.user.email %>:<%= post.created_at.strftime("%-d.%m.%Y, %H:%M")%> 
-      </br>Сообщение:<%= post.content %>
+      <%= post.user.email %>: <%= post.created_at.strftime("%-d.%m.%Y, %H:%M")%> 
+      </br>Сообщение: <%= post.content %>
     </p>
   <% end %>
 <% else %>
