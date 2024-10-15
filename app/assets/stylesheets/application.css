@@ -65,3 +65,22 @@ textarea::placeholder{
     left: 14rem;
     max-width: 390px;
 }
+.content-container > div > div > p{
+    border: 1px solid #245488;
+    padding: 10px;
+  
+    width: 150px;
+  
+    /* Эти опции - необходимые условия */
+    overflow: hidden;
+    white-space: nowrap;
+  
+    /* Добавляем троеточия в конце предложения, если текст
+    не помещается в блок */
+    text-overflow: ellipsis;
+}
+.following-section{
+    position: absolute;
+    top: 2rem;
+    right: 20rem;
+}

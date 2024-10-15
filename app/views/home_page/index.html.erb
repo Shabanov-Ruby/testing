@@ -17,7 +17,8 @@
       <p>Всего ваших публикаций: <%= @my_posts.count %></p>
       <% @my_posts.each do |post| %>
         <p>
-          <br> Вы: <%= post.content %>
+          <br/> Вы: 
+          <div style="max-width: 200px;"><%= post.content %></div>
           <div style="display: inline-flex; gap: 10px;">
             <%= post.created_at.strftime("%-d.%m.%Y, %H:%M") %>  
             <%= button_to 'Редактировать', edit_post_path(post), method: :get, class: 'btn btn-primary' %>

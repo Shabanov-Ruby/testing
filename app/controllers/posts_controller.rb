@@ -11,7 +11,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to root_path, notice: 'Публикация создана!'
     else
-      redirect_to root_path, notice: 'Публикация не может быть создана!'
+      redirect_to root_path, notice: 'Публикация не может быть создана ограничение на 90 символов!'
     end
   end
 
