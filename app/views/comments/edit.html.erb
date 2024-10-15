@@ -4,7 +4,7 @@
   <div>
     <%= form.text_area :content %>
   </div>
-  <%= form.submit "Сохранить изменения", class: 'btn btn-primary' %>
+  <%= form.submit "Сохранить изменения", class: 'btn btn-primary' %>  <%= flash[:notice] %>
 <% end %>
 
 <%= link_to 'Назад', root_path %>

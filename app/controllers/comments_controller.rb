@@ -12,14 +12,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
   end
 
-  def update
-    @comment = Comment.find(params[:id])
-    if @comment.update(comment_params)
-      redirect_to posts_path, notice: 'Комментарий успешно обновлен.'
-    else
-      render :edit, alert: 'Комментарий не удалось обновить.'
-    end
-  end
+  
 
   def destroy
     @comment = Comment.find(params[:id])
@@ -28,11 +21,22 @@ class CommentsController < ApplicationController
       delete_sub_comments(@comment)
       @comment.destroy
       flash[:notice] = 'Комментарий успешно удален.'
-    else
-      flash[:alert] = 'У вас нет прав на удаление этого комментария.'
     end
 
     redirect_back(fallback_location: root_path)
+  end
+
+  def update
+    @comment = Comment.find(params[:id])
+    if @comment.update(comment_params)
+      if @comment.saved_changes?
+        redirect_to posts_path, notice: 'Комментарий успешно обновлен.'
+      else
+        redirect_to posts_path
+      end
+    else
+      render :edit, alert: 'Комментарий не удалось обновить.'
+    end
   end
 
   private

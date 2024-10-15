@@ -6,7 +6,7 @@
     <%= comment.created_at.strftime('%-d %m %Y, %H:%M') %> <%= comment.user.email %>
     <% if comment.user == current_user %>
       <%= button_to 'Изменить', edit_post_comment_path(comment.post, comment), method: :get, class: 'btn btn-warning' %>
-      <%= button_to 'Удалить', post_comment_path(comment.post, comment), method: :delete, 
+      <%= button_to 'Удалить', post_comment_path(comment.post, comment), method: :delete,  
           data: { confirm: 'Вы уверены, что хотите удалить этот комментарий и все его ответы?' }, class: 'btn btn-danger' %>
     <% end %>
   </div>
@@ -17,7 +17,7 @@
     <div style="margin-left: <%= margin_left + 20 %>px; display: flex; align-items: center;">
       <%= form.text_area(:content, placeholder: "Ответ на комментарий...", style: "margin-right: 10px;") %>
       <%= form.hidden_field(:parent_id, value: comment.id) %>
-      <%= form.submit("Ответить", style: "margin-top: 0;") %>
+      <%= form.submit("Ответить", style: "margin-top: 0;") %> 
     </div>
   <% end %>
 <% end %>

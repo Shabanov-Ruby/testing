@@ -5,6 +5,7 @@
     <%= form.text_area :content, placeholder: "Редактировать публикацию..." %>
   </div>
   <%= form.submit "Обновить" %>
+  <%= flash[:notice] %>
 <% end %>
 
 <%= link_to 'Назад', root_path %>

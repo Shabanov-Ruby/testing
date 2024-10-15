@@ -63,4 +63,5 @@ textarea::placeholder{
     position: absolute;
     top: 2rem;
     left: 14rem;
+    max-width: 390px;
 }
