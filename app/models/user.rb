@@ -16,8 +16,9 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   def not_me
-    User.where.not(id: id)
+    User.where.not(id:)
   end
+
   def following_posts
     following_ids = following.pluck(:id)
     Post.where(user_id: following_ids)

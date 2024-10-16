@@ -11,34 +11,34 @@ class CommentsController < ApplicationController
 
   def edit; end
   # TODO: написать джобу и вставить этот код
-  
+
   # ActiveRecord::Base.transaction do
   #   delete_sub_comments(@comment)
   #   @comment.destroy!
   # end
 
-  #def delete_sub_comments(comment)
+  # def delete_sub_comments(comment)
   #  comment.replies.each do |child|
   #    delete_sub_comments(child)
   #    child.destroy!
   #  end
-  #end
+  # end
 
   def destroy
-    @comment.soft_delete
+    # @comment.soft_delete
+    #  flash[:notice] = 'Комментарий успешно удален.'
+    # redirect_back(fallback_location: root_path)
+
+    @comment = Comment.find(params[:id])
+
+    if @comment.user == current_user
+      delete_sub_comments(@comment)
+      @comment.destroy
       flash[:notice] = 'Комментарий успешно удален.'
+    end
+
     redirect_back(fallback_location: root_path)
   end
-
-#  def update
-#    @comment = Comment.find(params[:id])
-#    if @comment.update(comment_params)
-#      flash[:notice] = 'Комментарий обновлен.' if @comment.saved_changes?
-#      redirect_to posts_path
-#    else
-#      redirect_to edit_post_comment_path(@comment), notice: 'Комментарий не удалось обновить.'
-#    end
-#  end
 
   def update
     @comment = Comment.find(params[:id])
@@ -54,16 +54,20 @@ class CommentsController < ApplicationController
     end
   end
 
+  private
 
-    private
+  def delete_sub_comments(comment)
+    comment.replies.each do |child|
+      delete_sub_comments(child)
+      child.destroy
+    end
+  end
 
-
-    def set_post
+  def set_post
     @comment = Post.find(params[:post_id])
-    end
+  end
 
-    def comment_params
-      params.require(:comment).permit(:content, :parent_id)
-    end
-
+  def comment_params
+    params.require(:comment).permit(:content, :parent_id)
+  end
 end

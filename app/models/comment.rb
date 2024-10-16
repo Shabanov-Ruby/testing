@@ -18,6 +18,6 @@ class Comment < ApplicationRecord
   private
 
   def format_text
-    self.content = content.gsub(/<.*?>/,'').gsub(/(.{1,20})/, "\\1\n")
+    self.content = content.gsub(/<.*?>/, '').gsub(/(.{1,20})/, "\\1\n")
   end
 end

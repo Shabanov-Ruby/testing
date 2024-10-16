@@ -8,6 +8,7 @@ class HomePageController < ApplicationController
     @my_posts = current_user.posts.order(created_at: :desc)
     @following_posts = current_user.following_posts
   end
+
   def set_users
     @users = User.where.not(id: current_user.id)
   end
