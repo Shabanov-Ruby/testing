@@ -2,25 +2,31 @@
 
 class CommentsController < ApplicationController
   before_action :set_post
+  before_action :set_comment, only: %i[edit update destroy]
 
   def create
     @comment = @comment.comments.create(comment_params.merge(user: current_user))
     redirect_back(fallback_location: root_path)
   end
 
-  def edit
-    @comment = Comment.find(params[:id])
-  end
+  def edit; end
+  # TODO: написать джобу и вставить этот код
+  
+  # ActiveRecord::Base.transaction do
+  #   delete_sub_comments(@comment)
+  #   @comment.destroy!
+  # end
+
+  #def delete_sub_comments(comment)
+  #  comment.replies.each do |child|
+  #    delete_sub_comments(child)
+  #    child.destroy!
+  #  end
+  #end
 
   def destroy
-    @comment = Comment.find(params[:id])
-
-    if @comment.user == current_user
-      delete_sub_comments(@comment)
-      @comment.destroy
+    @comment.soft_delete
       flash[:notice] = 'Комментарий успешно удален.'
-    end
-
     redirect_back(fallback_location: root_path)
   end
 
@@ -49,20 +55,15 @@ class CommentsController < ApplicationController
   end
 
 
-  private
+    private
 
-  def delete_sub_comments(comment)
-    comment.replies.each do |child|
-      delete_sub_comments(child)
-      child.destroy
-    end
-  end
 
-  def set_post
+    def set_post
     @comment = Post.find(params[:post_id])
-  end
+    end
 
-  def comment_params
-    params.require(:comment).permit(:content, :parent_id)
-  end
+    def comment_params
+      params.require(:comment).permit(:content, :parent_id)
+    end
+
 end
