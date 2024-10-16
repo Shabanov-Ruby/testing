@@ -12,12 +12,12 @@ class CommentsController < ApplicationController
   def edit; end
 
   def destroy
-    #if @comment.user == current_user
+    # if @comment.user == current_user
     #  @comment.soft_delete
     #  flash[:notice] = 'Комментарий успешно удален.'
-    #end
-    #redirect_back(fallback_location: root_path)
-    
+    # end
+    # redirect_back(fallback_location: root_path)
+
     @comment = Comment.find(params[:id])
 
     if @comment.user == current_user
@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      flash[:notice] = 'Комментарий обновлен.' 
+      flash[:notice] = 'Комментарий обновлен.'
       redirect_to posts_path
     else
       redirect_to edit_post_comment_path(@comment), notice: 'Комментарий не удалось обновить.'
